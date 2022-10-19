@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SongModule } from './song/song.module';
-import env from './.env.js';
+import env from './env'
+
 
 @Module({
   imports: [
