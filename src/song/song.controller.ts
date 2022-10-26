@@ -6,15 +6,19 @@ import { SongDTO } from './song.dto';
 export class SongController {
   constructor(private readonly songService: SongService) {}
 
-  @Get('c')
-  getHello(@Query() query: SongDTO ): string {
-    console.log(query.title);
-    return this.songService.getHello();
+  @Get('slideshow')
+  slideshow() {
+    return this.songService.slideshow();
   }
 
-  @Get(':id')
-  findOne(@Param() params) {
-    console.log(params.id);
-    return this.songService.findAll()
+  @Get('line')
+  getLine() {
+    return this.songService.getLine();
   }
+
+  // @Get(':id')
+  // findOne(@Param() params) {
+  //   console.log(params.id);
+  //   return this.songService.findAll()
+  // }
 }
