@@ -16,9 +16,23 @@ export class SongController {
     return this.songService.getLine();
   }
 
-  // @Get(':id')
-  // findOne(@Param() params) {
-  //   console.log(params.id);
-  //   return this.songService.findAll()
-  // }
+  @Get('like')
+  getLike() {
+    return this.songService.getLike();
+  }
+
+  @Get('getRecommend')
+  getRecommend() {
+    return this.songService.getRecommend();
+  }
+
+  @Get('/albumList')
+  getAlbumList() {
+    return this.songService.getAlbumList();
+  }
+
+  @Get('/track')
+  getTrack(@Query('id') id: string) {
+    return this.songService.getTrack(id);
+  }
 }

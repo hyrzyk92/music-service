@@ -1,5 +1,5 @@
 export class SongDTO {
-    id: number;
+    albumId: number;
     title: string;
     url: string;
     cover: string;
