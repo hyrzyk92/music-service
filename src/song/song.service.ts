@@ -13,6 +13,7 @@ import { SongDTO } from './song.dto';
 import { HttpService } from '@nestjs/axios'
 import { catchError, lastValueFrom } from 'rxjs'
 import { AxiosError } from 'axios';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class SongService {
@@ -30,6 +31,7 @@ export class SongService {
     @InjectRepository(Category)
     private CategoryRepository: Repository<Category>,
     private readonly httpService: HttpService,
+    private configService: ConfigService,
   ) {}
   //获取轮播图
   async slideshow() {

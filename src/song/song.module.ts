@@ -11,10 +11,12 @@ import {
   Category,
 } from './song.entity';
 import { HttpModule } from '@nestjs/axios'
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
     HttpModule,
+    ConfigModule,
     TypeOrmModule.forFeature([
       Albums,
       Slideshow,
