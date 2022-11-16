@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, CACHE_MANAGER, Inject } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import {
@@ -14,6 +14,7 @@ import { HttpService } from '@nestjs/axios'
 import { catchError, lastValueFrom } from 'rxjs'
 import { AxiosError } from 'axios';
 import { ConfigService } from '@nestjs/config';
+import { Cache } from 'cache-manager'
 
 @Injectable()
 export class SongService {
@@ -32,10 +33,24 @@ export class SongService {
     private CategoryRepository: Repository<Category>,
     private readonly httpService: HttpService,
     private configService: ConfigService,
+    @Inject(CACHE_MANAGER) 
+    private cacheManager: Cache,
   ) {}
+
+  async index() {
+    return 1
+  }
+
   //获取轮播图
   async slideshow() {
-    const data = await this.slideshowRepository.find();
+    let data = await this.cacheManager.get('slideshow');
+
+    if (!data) {
+      data = await this.slideshowRepository.find();
+      const res = await this.cacheManager.set('slideshow', data, 3600)
+      console.log(res)
+    }
+    
     return {
       ret: 200,
       data: data,

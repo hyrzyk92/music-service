@@ -6,6 +6,11 @@ import { SongDTO } from './song.dto';
 export class SongController {
   constructor(private readonly songService: SongService) {}
 
+  @Get()
+  index() {
+    return this.songService.index();
+  }
+
   @Get('slideshow')
   slideshow() {
     return this.songService.slideshow();
